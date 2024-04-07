@@ -35,6 +35,7 @@ public class BasketSplitter {
 
         for (String item : items) {
             List<String> delivery_types = config.get(item);
+
             for (String delivery_type : delivery_types) {
                 if (howCommonDeliveryTypes.containsKey(delivery_type)) {
                     howCommonDeliveryTypes.put(delivery_type, howCommonDeliveryTypes.get(delivery_type) + 1);
@@ -44,8 +45,6 @@ public class BasketSplitter {
             }
         }
 
-        System.out.println(howCommonDeliveryTypes);
-
         // Find the best delivery types
         LinkedHashMap<String, Integer> bestDeliveryTypes = howCommonDeliveryTypes.entrySet()
             .stream()
@@ -54,8 +53,6 @@ public class BasketSplitter {
                 Map.Entry::getKey,
                 Map.Entry::getValue,
                 (oldValue, newValue) -> oldValue, LinkedHashMap::new));
-        
-        System.out.println(bestDeliveryTypes);
 
         // Map to count how many delivery types products have
         Map<String, Integer> howManyDeliveryTypes = new HashMap<String, Integer>();
@@ -96,7 +93,6 @@ public class BasketSplitter {
             while (itemsLeftIterator.hasNext()) {
                 String item = itemsLeftIterator.next();
                 if (config.get(item).contains(productBestDeliveryType)) {
-                    System.out.println("New Product added: " + item + " to " + productBestDeliveryType);
                     result.get(productBestDeliveryType).add(item);
                     itemsLeftIterator.remove();
                 }
