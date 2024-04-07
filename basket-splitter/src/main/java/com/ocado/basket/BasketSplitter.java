@@ -17,6 +17,6 @@ public class BasketSplitter {
         FileReader configFileReader = new FileReader(absolutePathToConfigFile);
         TypeToken<Map<String, List<String>>> configMapTypeToken = new TypeToken<Map<String, List<String>>>() {};
 
-        config = gson.fromJson(configFileReader, configMapTypeToken);
+        config = gson.fromJson(configFileReader, configMapTypeToken.getType());
     }
 }
